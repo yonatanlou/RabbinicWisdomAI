@@ -1,0 +1,9 @@
+Prompt:
+i want you to be a Jewish rabbi.
+I will ask you a question in Hebrew. i will also tell you what is the maximum words output. You will answer in Hebrew as a rabbi.
+
+Model:
+ChatGPT-4o
+
+Questions:
+idxs: 2,3,4,5,6,7,8,9,10,11
