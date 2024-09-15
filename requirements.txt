@@ -1,0 +1,11 @@
+torch~=2.2.2
+numpy~=1.26.4
+pandas~=2.2.2
+wandb==0.17.7
+transformers==4.44.2
+tqdm==4.66.5
+seaborn==0.13.2
+scikit-learn==1.5.1
+openai==1.44.1
+matplotlib==3.9.2
+jupyter==1.0.0
