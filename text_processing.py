@@ -120,3 +120,41 @@ def load_and_process_data(experiment_name):
     print(f"Processed data saved to {processed_file}")
 
     return question_and_answers_df_
+
+
+def generate_ext_q_and_a(q_and_a, relevant_titles, answer_length):
+    results = []
+    tmp_q_and_a = q_and_a[q_and_a["title"].isin(relevant_titles)]
+    for i, row in tmp_q_and_a.iterrows():
+        paragraphs = row["paragraphs"]
+        title = row["title"]
+
+        # For each paragraph, access the context and questions
+        for paragraph in paragraphs:
+            context = paragraph["context"]
+            qas = paragraph["qas"]
+
+            # For each Q&A pair, extract the question and answer
+            for qa in qas:
+                tmp_result = {}
+                question = qa["question"]
+
+                answer = qa["answers"][0]
+                start = answer["answer.start"]
+                answer_text = answer["text"]
+
+                before = (start - answer_length) if start > answer_length else start
+
+                extracted_answer = context[before : start + answer_length]
+                combined_answer = extracted_answer + ". לכן התשובה היא " + answer_text
+
+                tmp_result.update(
+                    {
+                        "questions_q_a": question,
+                        "answers_q_a": combined_answer,
+                        "title": title,
+                    }
+                )
+                results.append(tmp_result)
+    return pd.DataFrame(results)
+    # return questions_q_a, answers_q_a
